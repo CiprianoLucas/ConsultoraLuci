@@ -1,7 +1,7 @@
 import boto3
 from httpx import AsyncClient
 from psycopg_pool import AsyncConnectionPool
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from domain.services.auth import AuthService
 from domain.services.consulta import ConsultaService
@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     iam_aws_pass: str
     ia_id: str
     ia_alias: str
+
+    model_config = SettingsConfigDict(env_file=".env")
 
 
 class Container:
