@@ -69,42 +69,54 @@
             >
               <div class="card-body">
                 <h5 class="card-title">{{ registro.nome }}</h5>
+                <div v-if="!registro.ia">
+                  <div class="mt-3">
+                    <h6 class="fw-bold">🧑‍💼 Ordem dos Colaboradores:</h6>
+                    <ol class="list-group list-group-numbered mb-3">
+                      <li
+                        v-for="(colab, index) in registro.colaboradores"
+                        :key="index"
+                        class="list-group-item"
+                      >
+                        {{ colab }}
+                      </li>
+                    </ol>
+                  </div>
 
-                <div class="mt-3">
-                  <h6 class="fw-bold">🧑‍💼 Ordem dos Colaboradores:</h6>
-                  <ol class="list-group list-group-numbered mb-3">
-                    <li
-                      v-for="(colab, index) in registro.colaboradores"
-                      :key="index"
-                      class="list-group-item"
-                    >
-                      {{ colab }}
-                    </li>
-                  </ol>
-                </div>
+                  <div class="mb-3">
+                    <h6 class="fw-bold text-success">🟢 Assuntos para Propor:</h6>
+                    <div>
+                      <span
+                        v-for="(item, index) in registro.propor"
+                        :key="index"
+                        class="badge bg-success d-block py-2 mb-2 text-wrap"
+                      >
+                        {{ item }}
+                      </span>
+                    </div>
+                  </div>
 
-                <div class="mb-3">
-                  <h6 class="fw-bold text-success">🟢 Assuntos para Propor:</h6>
                   <div>
-                    <span
-                      v-for="(item, index) in registro.propor"
-                      :key="index"
-                      class="badge bg-success d-block py-2 mb-2 text-wrap"
-                    >
-                      {{ item }}
-                    </span>
+                    <h6 class="fw-bold text-danger">🟠 Assuntos a Evitar:</h6>
+                    <div>
+                      <span
+                        v-for="(item, index) in registro.evitar"
+                        :key="index"
+                        class="badge bg-danger d-block py-2 mb-2 text-wrap"
+                      >
+                        {{ item }}
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                <div>
-                  <h6 class="fw-bold text-danger">🟠 Assuntos a Evitar:</h6>
+                <div v-else>
+                  <p class="card-title">
+                    Infelizmente ia gerou fora do modelo proposto. Mas ainda podes ver sua
+                    resposta:
+                  </p>
                   <div>
-                    <span
-                      v-for="(item, index) in registro.evitar"
-                      :key="index"
-                      class="badge bg-danger d-block py-2 mb-2 text-wrap"
-                    >
-                      {{ item }}
+                    <span>
+                      {{ registro.ia }}
                     </span>
                   </div>
                 </div>
@@ -123,6 +135,7 @@ import axios from "axios";
 
 type registro = {
   nome: string;
+  ia?: string;
   colaboradores: string[];
   propor: string[];
   evitar: string[];

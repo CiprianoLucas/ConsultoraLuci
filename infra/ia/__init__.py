@@ -1,5 +1,6 @@
 import json
 import uuid
+import re
 
 import boto3
 
@@ -19,6 +20,7 @@ class IaRepository:
 
         client = self.session.client("bedrock-agent-runtime")
 
+        output_text = ''
         response = client.invoke_agent(
             agentId=self.agent_id,
             agentAliasId=self.agent_alias,
@@ -26,17 +28,24 @@ class IaRepository:
             inputText=dados_json,
         )
 
-        output_text = ""
+        try:
+            if "completion" in response:
+                for event in response["completion"]:
+                    if "chunk" in event:
+                        chunk = event["chunk"]
+                        part = chunk.get("bytes", b"").decode("utf-8")
+                        output_text += part
+            else:
+                output_text = response.get("outputText", "")
 
-        if "completion" in response:
-            for event in response["completion"]:
-                if "chunk" in event:
-                    chunk = event["chunk"]
-                    part = chunk.get("bytes", b"").decode("utf-8")
-                    output_text += part
-        else:
-            output_text = response.get("outputText", "")
-
-        resultado_dict = json.loads(output_text)
+            matches = re.findall(r'\{.*?\}', output_text, re.DOTALL)
+            resultado_dict = json.loads(matches[0])
+        except:
+            resultado_dict = {
+                "colaboradores": [],
+                "propor": [],
+                "evitar": [],
+                "ia": output_text or "Me desculpe! Buguei ;(",
+            }
 
         return resultado_dict
