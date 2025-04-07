@@ -26,7 +26,7 @@ class IaRepository:
             inputText=dados_json,
         )
 
-        output_text = '{\n    "colaboradores": ["Caio", "Maria", "João"],\n    "propor": [\n        "soluções práticas e objetivas para necessidades financeiras",\n        "detalhes sobre investimentos em arte",\n        "opções organizadas e estruturadas",\n        "explicações detalhadas sobre produtos financeiros"\n    ],\n    "evitar": [\n        "atendimentos demorados",\n        "comunicação confusa ou imprecisa",\n        "atrasos no atendimento",\n        "abordagens desorganizadas"\n    ]\n}'
+        output_text = ""
 
         if "completion" in response:
             for event in response["completion"]:
