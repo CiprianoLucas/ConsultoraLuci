@@ -1,9 +1,11 @@
-from fastapi import Depends, Response, status
+from fastapi import Depends, Response, status, HTTPException
 from fastapi.routing import APIRouter
 
 from app.container import container
 from app.DTOs.consulta import ConsultarDTO
 from app.HTTP.middlewares.auth import get_agencia_from_token
+
+from domain.exceptions import NotFoundException
 
 consulta_router = APIRouter()
 
@@ -13,11 +15,25 @@ async def consultar(
     request: ConsultarDTO,
     agencia: int = Depends(get_agencia_from_token),
 ):
-    await container.consulta_service.push_in_line(request.cooperado, agencia)
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
+    try:
+        await container.consulta_service.push_in_line(request.cooperado, agencia)
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
+    except NotFoundException as e:
+        raise HTTPException(404, str(e))
+    except Exception as e:
+        raise HTTPException(
+            500, "Erro interno, se persistir entre em contato com nosso suporte"
+        )
 
 
 @consulta_router.get("/consulta/", status_code=status.HTTP_200_OK)
 async def consultas(agencia: int = Depends(get_agencia_from_token)):
-    result = await container.consulta_service.list_consultas_agencia(agencia)
-    return result or []
+    try:
+        result = await container.consulta_service.list_consultas_agencia(agencia)
+        return result or []
+    except NotFoundException as e:
+        raise HTTPException(404, str(e))
+    except Exception as e:
+        raise HTTPException(
+            500, "Erro interno, se persistir entre em contato com nosso suporte"
+        )

@@ -1,4 +1,5 @@
 from psycopg_pool import AsyncConnectionPool
+from domain.exceptions import NotFoundException
 
 
 class CooperadoDb:
@@ -18,8 +19,8 @@ class CooperadoDb:
                             """
                 result = await cur.execute(sql, (cpf,))
                 if result.rowcount == 0:
-                    raise Exception("cooperado não enxontrado")
+                    raise NotFoundException("CPF do cooperado")
                 cooperado = await result.fetchone()
                 if cooperado is None:
-                    raise Exception("cooperado não enxontrado")
+                    raise NotFoundException("CPF do cooperado")
                 return cooperado

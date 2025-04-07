@@ -1,5 +1,6 @@
 from infra.auth import AuthRepository
 from infra.database.agencia import AgenciaDb
+from domain.exceptions import InvalidTokenException, WrongPasswordException
 
 
 class AuthService:
@@ -12,7 +13,7 @@ class AuthService:
 
     def get_agencia_from_token(self, token: str) -> int:
         if not token or not isinstance(token, str):
-            raise Exception(status_code=401, detail="Token ausente ou malformado")
+            raise InvalidTokenException()
 
         return self.auth_repository.verify_token(token).get("agencia")
 
@@ -20,7 +21,7 @@ class AuthService:
         senha_hash = await self.agencia_db.get_senha_by_agencia_id(agencia)
         if self.auth_repository.verify_password(senha, senha_hash):
             return self.generate_token_with_agencia(agencia)
-        raise Exception(status_code=401, detail="Autenticação inválida")
+        raise WrongPasswordException()
 
     def generate_token_with_agencia(self, agencia: int) -> str:
         return self.auth_repository.create_token({"agencia": str(agencia)})

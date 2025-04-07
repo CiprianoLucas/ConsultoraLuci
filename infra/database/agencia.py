@@ -1,4 +1,5 @@
 from psycopg_pool import AsyncConnectionPool
+from domain.exceptions import NotFoundException
 
 
 class AgenciaDb:
@@ -18,8 +19,8 @@ class AgenciaDb:
                             """
                 result = await cur.execute(sql, (id,))
                 if result.rowcount == 0:
-                    raise Exception("agencia não enxontrada")
+                    raise NotFoundException("agência")
                 agencia = await result.fetchone()
                 if agencia is None:
-                    raise Exception("agencia não enxontrada")
+                    raise NotFoundException("agência")
                 return agencia[0]

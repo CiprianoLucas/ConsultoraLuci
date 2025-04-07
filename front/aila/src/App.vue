@@ -26,7 +26,13 @@
                 placeholder="Senha"
               />
             </div>
-            <button type="submit" class="btn btn-success w-100"><p>Entrar</p></button>
+            <button type="submit" class="btn btn-success w-100" :disabled="logando">
+              <p v-if="!logando">Entrar</p>
+              <p v-else>Entrando...</p>
+            </button>
+            <div class="d-flex justify-content-center">
+              <p v-if="loginError" class="text-danger m-2">{{ loginError }}</p>
+            </div>
           </form>
         </template>
 
@@ -41,7 +47,13 @@
                 placeholder="Digite o CPF"
               />
             </div>
-            <button type="submit" class="btn btn-success w-100"><p>Consultar</p></button>
+            <button type="submit" class="btn btn-success w-100" :disabled="consultando">
+              <p v-if="!consultando">Consultar</p>
+              <p v-else="!consultando">Gerando consulta...</p>
+            </button>
+            <div class="d-flex justify-content-center">
+              <p v-if="consultaError" class="text-danger m-2">{{ consultaError }}</p>
+            </div>
           </form>
           <button @click="logout" class="btn btn-danger w-100 mt-3"><p>Sair</p></button>
 
@@ -77,7 +89,7 @@
                     <span
                       v-for="(item, index) in registro.propor"
                       :key="index"
-                      class="badge bg-success me-2 mb-2"
+                      class="badge bg-success d-block py-2 mb-2 text-wrap"
                     >
                       {{ item }}
                     </span>
@@ -90,7 +102,7 @@
                     <span
                       v-for="(item, index) in registro.evitar"
                       :key="index"
-                      class="badge bg-danger me-2 mb-2"
+                      class="badge bg-danger d-block py-2 mb-2 text-wrap"
                     >
                       {{ item }}
                     </span>
@@ -118,6 +130,10 @@ type registro = {
 
 const agencia = ref<string>("");
 const senha = ref<string>("");
+const loginError = ref<string>("");
+const consultaError = ref<string>("");
+const logando = ref<boolean>(false);
+const consultando = ref<boolean>(false);
 const token = ref<string | null>(null);
 
 const cpf = ref<string>("");
@@ -142,6 +158,12 @@ onUnmounted(() => {
 });
 
 function login(): void {
+  if (!agencia.value || !senha.value) {
+    loginError.value = "Agência e/ou senha não informados";
+    return;
+  }
+
+  logando.value = true;
   api
     .post("/get_token/", {
       agencia: agencia.value,
@@ -150,9 +172,15 @@ function login(): void {
     .then(({ data }) => {
       token.value = data.token as string;
       localStorage.setItem("token", token.value);
+      loginError.value = "";
     })
     .catch((error) => {
-      alert("Erro ao fazer login: " + (error.response?.data?.detail || error.message));
+      loginError.value = error.response?.data?.detail || error.message;
+    })
+    .finally(() => {
+      logando.value = false;
+      agencia.value = "";
+      senha.value = "";
     });
 }
 
@@ -164,6 +192,7 @@ function logout(): void {
 
 async function consultar(): Promise<void> {
   if (!token.value) return;
+  consultando.value = true;
 
   api
     .post(
@@ -179,9 +208,14 @@ async function consultar(): Promise<void> {
     )
     .then(() => {
       cpf.value = "";
+      consultaError.value = "";
     })
     .catch((error) => {
-      alert("Erro ao fazer consulta: " + (error.response?.data?.detail || error.message));
+      if (error.status == 401) logout();
+      consultaError.value = error.response?.data?.detail || error.message;
+    })
+    .finally(() => {
+      consultando.value = false;
     });
 }
 
@@ -198,10 +232,8 @@ function buscarRegistros(): void {
       registros.value = data;
     })
     .catch((error) => {
-      console.error(
-        "Erro ao buscar registros:",
-        error.response?.data?.detail || error.message
-      );
+      if (error.status == 401) logout();
+      console.error(error.response?.data?.detail || error.message);
     });
 }
 </script>

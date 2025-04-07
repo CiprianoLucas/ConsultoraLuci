@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 
 import jwt
 
+from domain.exceptions import InvalidTokenException
+
 
 def create_token(subject: str | dict, secret_key: str, expitarion: int) -> str:
     expiration = datetime.utcnow() + timedelta(minutes=expitarion)
@@ -16,6 +18,6 @@ def verify_token(token: str, secret_key: str) -> int:
         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
         return json.loads(payload.get("sub"))
     except jwt.ExpiredSignatureError:
-        raise Exception(status_code=401, detail="Token expirado")
+        raise InvalidTokenException()
     except jwt.InvalidTokenError:
-        raise Exception(status_code=401, detail="Token inválido")
+        raise InvalidTokenException()
