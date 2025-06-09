@@ -52,6 +52,7 @@ class ConsultaService:
 
     async def start_consulta(self, associado_cpf: str, agencia: int):
         hoje = datetime.now(timezone.utc)
+        print(f"Agência {agencia} consultando cpf {associado_cpf} às {hoje}")
         consulta_recente = await self.consulta_nosql.ultima_consulta(
             associado_cpf, agencia
         )

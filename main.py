@@ -13,7 +13,7 @@ from worker import start_worker_in_thread
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await container.load_dependencies()
-    start_worker_in_thread()
+    # start_worker_in_thread()
     # wait until shutdown
     yield
     # runs after shutdown

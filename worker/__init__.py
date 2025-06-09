@@ -14,11 +14,15 @@ async def worker_loop():
             item = await container.redis_connection.client.blpop(
                 container.settings.redis_fila, timeout=0
             )
-            if item:
-                _, value = item
-                dados: str = json.loads(value)
-                dados = dados.split("_")
-                await container.consulta_service.start_consulta(dados[0], dados[1])
+            try:
+                if item:
+                    _, value = item
+                    dados: str = json.loads(value)
+                    dados = dados.split("_")
+                    await container.consulta_service.start_consulta(dados[0], dados[1])
+            except Exception as e:
+                print(str(e))
+                
         except Exception as e:
             print("Erro ao processar item da fila:", e)
             await asyncio.sleep(2)
