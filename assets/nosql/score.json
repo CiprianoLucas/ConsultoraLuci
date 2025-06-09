@@ -1,0 +1,1402 @@
+[
+    {
+        "cpf": "10728507960",
+        "company": "SERASA",
+        "result": {
+            "score": 777
+        }
+    },
+    {
+        "cpf": "10728507960",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "10015217300",
+        "company": "SERASA",
+        "result": {
+            "score": 226
+        }
+    },
+    {
+        "cpf": "10015217300",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "75818307425",
+        "company": "SERASA",
+        "result": {
+            "score": 232
+        }
+    },
+    {
+        "cpf": "75818307425",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "96209620597",
+        "company": "SERASA",
+        "result": {
+            "score": 867
+        }
+    },
+    {
+        "cpf": "96209620597",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "28660775267",
+        "company": "SERASA",
+        "result": {
+            "score": 819
+        }
+    },
+    {
+        "cpf": "28660775267",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "80494089187",
+        "company": "SERASA",
+        "result": {
+            "score": 254
+        }
+    },
+    {
+        "cpf": "80494089187",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "68978696803",
+        "company": "SERASA",
+        "result": {
+            "score": 784
+        }
+    },
+    {
+        "cpf": "68978696803",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "22852443610",
+        "company": "SERASA",
+        "result": {
+            "score": 182
+        }
+    },
+    {
+        "cpf": "22852443610",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "40491383407",
+        "company": "SERASA",
+        "result": {
+            "score": 703
+        }
+    },
+    {
+        "cpf": "40491383407",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "9564447754",
+        "company": "SERASA",
+        "result": {
+            "score": 404
+        }
+    },
+    {
+        "cpf": "9564447754",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "25424502739",
+        "company": "SERASA",
+        "result": {
+            "score": 158
+        }
+    },
+    {
+        "cpf": "25424502739",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "82428904630",
+        "company": "SERASA",
+        "result": {
+            "score": 913
+        }
+    },
+    {
+        "cpf": "82428904630",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "34127835313",
+        "company": "SERASA",
+        "result": {
+            "score": 814
+        }
+    },
+    {
+        "cpf": "34127835313",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "48502283125",
+        "company": "SERASA",
+        "result": {
+            "score": 873
+        }
+    },
+    {
+        "cpf": "48502283125",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "34353399719",
+        "company": "SERASA",
+        "result": {
+            "score": 380
+        }
+    },
+    {
+        "cpf": "34353399719",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "23927959519",
+        "company": "SERASA",
+        "result": {
+            "score": 943
+        }
+    },
+    {
+        "cpf": "23927959519",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "94348033114",
+        "company": "SERASA",
+        "result": {
+            "score": 831
+        }
+    },
+    {
+        "cpf": "94348033114",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "192590200",
+        "company": "SERASA",
+        "result": {
+            "score": 409
+        }
+    },
+    {
+        "cpf": "192590200",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "81106202626",
+        "company": "SERASA",
+        "result": {
+            "score": 838
+        }
+    },
+    {
+        "cpf": "81106202626",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "69497439251",
+        "company": "SERASA",
+        "result": {
+            "score": 536
+        }
+    },
+    {
+        "cpf": "69497439251",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "71433782853",
+        "company": "SERASA",
+        "result": {
+            "score": 596
+        }
+    },
+    {
+        "cpf": "71433782853",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "7571922001",
+        "company": "SERASA",
+        "result": {
+            "score": 966
+        }
+    },
+    {
+        "cpf": "7571922001",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "27103298782",
+        "company": "SERASA",
+        "result": {
+            "score": 166
+        }
+    },
+    {
+        "cpf": "27103298782",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "58625866143",
+        "company": "SERASA",
+        "result": {
+            "score": 376
+        }
+    },
+    {
+        "cpf": "58625866143",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "60621221216",
+        "company": "SERASA",
+        "result": {
+            "score": 345
+        }
+    },
+    {
+        "cpf": "60621221216",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "85833584751",
+        "company": "SERASA",
+        "result": {
+            "score": 631
+        }
+    },
+    {
+        "cpf": "85833584751",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "75808247483",
+        "company": "SERASA",
+        "result": {
+            "score": 281
+        }
+    },
+    {
+        "cpf": "75808247483",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "72722445338",
+        "company": "SERASA",
+        "result": {
+            "score": 391
+        }
+    },
+    {
+        "cpf": "72722445338",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "80256138727",
+        "company": "SERASA",
+        "result": {
+            "score": 319
+        }
+    },
+    {
+        "cpf": "80256138727",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "8911468329",
+        "company": "SERASA",
+        "result": {
+            "score": 184
+        }
+    },
+    {
+        "cpf": "8911468329",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "46016575505",
+        "company": "SERASA",
+        "result": {
+            "score": 364
+        }
+    },
+    {
+        "cpf": "46016575505",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "47540849974",
+        "company": "SERASA",
+        "result": {
+            "score": 750
+        }
+    },
+    {
+        "cpf": "47540849974",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "66322337743",
+        "company": "SERASA",
+        "result": {
+            "score": 42
+        }
+    },
+    {
+        "cpf": "66322337743",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "21288008198",
+        "company": "SERASA",
+        "result": {
+            "score": 666
+        }
+    },
+    {
+        "cpf": "21288008198",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "53007835007",
+        "company": "SERASA",
+        "result": {
+            "score": 181
+        }
+    },
+    {
+        "cpf": "53007835007",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "82365829169",
+        "company": "SERASA",
+        "result": {
+            "score": 29
+        }
+    },
+    {
+        "cpf": "82365829169",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "73258592575",
+        "company": "SERASA",
+        "result": {
+            "score": 150
+        }
+    },
+    {
+        "cpf": "73258592575",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "80038449939",
+        "company": "SERASA",
+        "result": {
+            "score": 230
+        }
+    },
+    {
+        "cpf": "80038449939",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "94178147006",
+        "company": "SERASA",
+        "result": {
+            "score": 568
+        }
+    },
+    {
+        "cpf": "94178147006",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "76936878755",
+        "company": "SERASA",
+        "result": {
+            "score": 799
+        }
+    },
+    {
+        "cpf": "76936878755",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "15465090052",
+        "company": "SERASA",
+        "result": {
+            "score": 916
+        }
+    },
+    {
+        "cpf": "15465090052",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "51118752859",
+        "company": "SERASA",
+        "result": {
+            "score": 734
+        }
+    },
+    {
+        "cpf": "51118752859",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "38813224876",
+        "company": "SERASA",
+        "result": {
+            "score": 388
+        }
+    },
+    {
+        "cpf": "38813224876",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "48520792101",
+        "company": "SERASA",
+        "result": {
+            "score": 237
+        }
+    },
+    {
+        "cpf": "48520792101",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "78516650411",
+        "company": "SERASA",
+        "result": {
+            "score": 89
+        }
+    },
+    {
+        "cpf": "78516650411",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "77902253055",
+        "company": "SERASA",
+        "result": {
+            "score": 66
+        }
+    },
+    {
+        "cpf": "77902253055",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "56213067451",
+        "company": "SERASA",
+        "result": {
+            "score": 401
+        }
+    },
+    {
+        "cpf": "56213067451",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "90200337926",
+        "company": "SERASA",
+        "result": {
+            "score": 946
+        }
+    },
+    {
+        "cpf": "90200337926",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "92680699565",
+        "company": "SERASA",
+        "result": {
+            "score": 146
+        }
+    },
+    {
+        "cpf": "92680699565",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "58327734119",
+        "company": "SERASA",
+        "result": {
+            "score": 753
+        }
+    },
+    {
+        "cpf": "58327734119",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "49055939304",
+        "company": "SERASA",
+        "result": {
+            "score": 642
+        }
+    },
+    {
+        "cpf": "49055939304",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "74212927212",
+        "company": "SERASA",
+        "result": {
+            "score": 722
+        }
+    },
+    {
+        "cpf": "74212927212",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "86891880363",
+        "company": "SERASA",
+        "result": {
+            "score": 531
+        }
+    },
+    {
+        "cpf": "86891880363",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "92723591552",
+        "company": "SERASA",
+        "result": {
+            "score": 206
+        }
+    },
+    {
+        "cpf": "92723591552",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "88241170907",
+        "company": "SERASA",
+        "result": {
+            "score": 320
+        }
+    },
+    {
+        "cpf": "88241170907",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "83962762203",
+        "company": "SERASA",
+        "result": {
+            "score": 754
+        }
+    },
+    {
+        "cpf": "83962762203",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "29329074349",
+        "company": "SERASA",
+        "result": {
+            "score": 357
+        }
+    },
+    {
+        "cpf": "29329074349",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "35150317073",
+        "company": "SERASA",
+        "result": {
+            "score": 188
+        }
+    },
+    {
+        "cpf": "35150317073",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "26319085795",
+        "company": "SERASA",
+        "result": {
+            "score": 627
+        }
+    },
+    {
+        "cpf": "26319085795",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "34826800956",
+        "company": "SERASA",
+        "result": {
+            "score": 949
+        }
+    },
+    {
+        "cpf": "34826800956",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "9648034210",
+        "company": "SERASA",
+        "result": {
+            "score": 315
+        }
+    },
+    {
+        "cpf": "9648034210",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "30538769293",
+        "company": "SERASA",
+        "result": {
+            "score": 491
+        }
+    },
+    {
+        "cpf": "30538769293",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "65230551131",
+        "company": "SERASA",
+        "result": {
+            "score": 1000
+        }
+    },
+    {
+        "cpf": "65230551131",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "36570051197",
+        "company": "SERASA",
+        "result": {
+            "score": 348
+        }
+    },
+    {
+        "cpf": "36570051197",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "49076342029",
+        "company": "SERASA",
+        "result": {
+            "score": 678
+        }
+    },
+    {
+        "cpf": "49076342029",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "8133685319",
+        "company": "SERASA",
+        "result": {
+            "score": 86
+        }
+    },
+    {
+        "cpf": "8133685319",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "32211173760",
+        "company": "SERASA",
+        "result": {
+            "score": 454
+        }
+    },
+    {
+        "cpf": "32211173760",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "51290339731",
+        "company": "SERASA",
+        "result": {
+            "score": 202
+        }
+    },
+    {
+        "cpf": "51290339731",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "60645849955",
+        "company": "SERASA",
+        "result": {
+            "score": 806
+        }
+    },
+    {
+        "cpf": "60645849955",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "60129604838",
+        "company": "SERASA",
+        "result": {
+            "score": 42
+        }
+    },
+    {
+        "cpf": "60129604838",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "39525948901",
+        "company": "SERASA",
+        "result": {
+            "score": 554
+        }
+    },
+    {
+        "cpf": "39525948901",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "88523879228",
+        "company": "SERASA",
+        "result": {
+            "score": 227
+        }
+    },
+    {
+        "cpf": "88523879228",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "56714230191",
+        "company": "SERASA",
+        "result": {
+            "score": 573
+        }
+    },
+    {
+        "cpf": "56714230191",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "33549794042",
+        "company": "SERASA",
+        "result": {
+            "score": 564
+        }
+    },
+    {
+        "cpf": "33549794042",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "17264933630",
+        "company": "SERASA",
+        "result": {
+            "score": 119
+        }
+    },
+    {
+        "cpf": "17264933630",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "98167211122",
+        "company": "SERASA",
+        "result": {
+            "score": 23
+        }
+    },
+    {
+        "cpf": "98167211122",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "95221676629",
+        "company": "SERASA",
+        "result": {
+            "score": 888
+        }
+    },
+    {
+        "cpf": "95221676629",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "21985612451",
+        "company": "SERASA",
+        "result": {
+            "score": 929
+        }
+    },
+    {
+        "cpf": "21985612451",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "76442685482",
+        "company": "SERASA",
+        "result": {
+            "score": 447
+        }
+    },
+    {
+        "cpf": "76442685482",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "38885105945",
+        "company": "SERASA",
+        "result": {
+            "score": 657
+        }
+    },
+    {
+        "cpf": "38885105945",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "97467748782",
+        "company": "SERASA",
+        "result": {
+            "score": 374
+        }
+    },
+    {
+        "cpf": "97467748782",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "40192812558",
+        "company": "SERASA",
+        "result": {
+            "score": 13
+        }
+    },
+    {
+        "cpf": "40192812558",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "96229546577",
+        "company": "SERASA",
+        "result": {
+            "score": 940
+        }
+    },
+    {
+        "cpf": "96229546577",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "38093167085",
+        "company": "SERASA",
+        "result": {
+            "score": 349
+        }
+    },
+    {
+        "cpf": "38093167085",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "79494685325",
+        "company": "SERASA",
+        "result": {
+            "score": 667
+        }
+    },
+    {
+        "cpf": "79494685325",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "55871600090",
+        "company": "SERASA",
+        "result": {
+            "score": 368
+        }
+    },
+    {
+        "cpf": "55871600090",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "69356956650",
+        "company": "SERASA",
+        "result": {
+            "score": 233
+        }
+    },
+    {
+        "cpf": "69356956650",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "48177119582",
+        "company": "SERASA",
+        "result": {
+            "score": 213
+        }
+    },
+    {
+        "cpf": "48177119582",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "58818920921",
+        "company": "SERASA",
+        "result": {
+            "score": 315
+        }
+    },
+    {
+        "cpf": "58818920921",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "32161120384",
+        "company": "SERASA",
+        "result": {
+            "score": 11
+        }
+    },
+    {
+        "cpf": "32161120384",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "19388850150",
+        "company": "SERASA",
+        "result": {
+            "score": 364
+        }
+    },
+    {
+        "cpf": "19388850150",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "79973850878",
+        "company": "SERASA",
+        "result": {
+            "score": 973
+        }
+    },
+    {
+        "cpf": "79973850878",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "14923305152",
+        "company": "SERASA",
+        "result": {
+            "score": 720
+        }
+    },
+    {
+        "cpf": "14923305152",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "20395511839",
+        "company": "SERASA",
+        "result": {
+            "score": 318
+        }
+    },
+    {
+        "cpf": "20395511839",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    },
+    {
+        "cpf": "97330128442",
+        "company": "SERASA",
+        "result": {
+            "score": 840
+        }
+    },
+    {
+        "cpf": "97330128442",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "94457868147",
+        "company": "SERASA",
+        "result": {
+            "score": 85
+        }
+    },
+    {
+        "cpf": "94457868147",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "42188333023",
+        "company": "SERASA",
+        "result": {
+            "score": 736
+        }
+    },
+    {
+        "cpf": "42188333023",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "30258398060",
+        "company": "SERASA",
+        "result": {
+            "score": 491
+        }
+    },
+    {
+        "cpf": "30258398060",
+        "company": "SPC",
+        "result": {
+            "nivel": "medio"
+        }
+    },
+    {
+        "cpf": "55692494615",
+        "company": "SERASA",
+        "result": {
+            "score": 294
+        }
+    },
+    {
+        "cpf": "55692494615",
+        "company": "SPC",
+        "result": {
+            "nivel": "alto"
+        }
+    },
+    {
+        "cpf": "8279306991",
+        "company": "SERASA",
+        "result": {
+            "score": 373
+        }
+    },
+    {
+        "cpf": "8279306991",
+        "company": "SPC",
+        "result": {
+            "nivel": "baixo"
+        }
+    }
+]

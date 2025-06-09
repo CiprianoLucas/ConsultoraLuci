@@ -112,7 +112,7 @@ class ConsultaService:
                         isinstance(score_val, str)
                         and score_val.replace(".", "", 1).isdigit()
                     ):
-                        fator = fator * (1000 / float(score_val))
+                        fator = fator * (float(score_val) / 1000)
                     else:
                         fator = fator * 0.5
                 case "SPC":
