@@ -11,14 +11,10 @@ class ScoreNoSql:
 
     async def consultar_score(self, cpf: str):
         cursor = self.collection.find(
-            {"cpf": cpf},
-            {"_id": 0, "result": 1, "company": 1}
+            {"cpf": cpf}, {"_id": 0, "result": 1, "company": 1}
         )
         resultados = []
         async for doc in cursor:
-            resultados.append({
-                "company": doc["company"],
-                "result": doc["result"]
-            })
+            resultados.append({"company": doc["company"], "result": doc["result"]})
 
         return resultados

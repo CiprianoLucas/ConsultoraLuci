@@ -1,14 +1,11 @@
 import json
 
-from psycopg_pool import AsyncConnectionPool
+from infra.sql import BaseDb
 
 
-class ConsultasDb:
-    pool: AsyncConnectionPool
+class ConsultasDb(BaseDb):
 
-    def __init__(self, pool: AsyncConnectionPool) -> None:
-        self.pool = pool
-
+    @BaseDb.reconnect_on_failure
     async def insert(self, agencia: int, resultado: dict):
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:
@@ -27,6 +24,7 @@ class ConsultasDb:
                 except Exception as e:
                     raise Exception(str(e))
 
+    @BaseDb.reconnect_on_failure
     async def list_compras_by_associado(self, id: str) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:
@@ -39,6 +37,7 @@ class ConsultasDb:
                 result = await cur.execute(sql, (id,))
                 return await result.fetchall()
 
+    @BaseDb.reconnect_on_failure
     async def list_creditos_by_associado(self, id: str) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:
@@ -51,6 +50,7 @@ class ConsultasDb:
                 result = await cur.execute(sql, (id,))
                 return await result.fetchall()
 
+    @BaseDb.reconnect_on_failure
     async def list_feedback_by_associado(self, id: str) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:
@@ -64,6 +64,7 @@ class ConsultasDb:
                 rows = await result.fetchall()
                 return [row[0] for row in rows]
 
+    @BaseDb.reconnect_on_failure
     async def list_personalidade_by_associado(self, id: str) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:
@@ -79,6 +80,7 @@ class ConsultasDb:
                 rows = await result.fetchall()
                 return [row[0] for row in rows]
 
+    @BaseDb.reconnect_on_failure
     async def list_personalidade_by_colaborador(self, id: int) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:
@@ -94,6 +96,7 @@ class ConsultasDb:
                 rows = await result.fetchall()
                 return [row[0] for row in rows]
 
+    @BaseDb.reconnect_on_failure
     async def list_creditos_by_colaborador(self, id: int) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:
@@ -112,6 +115,7 @@ class ConsultasDb:
                 result = await cur.execute(sql, (id,))
                 return await result.fetchall()
 
+    @BaseDb.reconnect_on_failure
     async def list_consultas_agencia(self, id: int) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:

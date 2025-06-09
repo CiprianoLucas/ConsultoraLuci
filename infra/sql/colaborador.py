@@ -1,12 +1,8 @@
-from psycopg_pool import AsyncConnectionPool
+from infra.sql import BaseDb
 
 
-class ColaboradorDb:
-    pool: AsyncConnectionPool
-
-    def __init__(self, pool: AsyncConnectionPool) -> None:
-        self.pool = pool
-
+class ColaboradorDb(BaseDb):
+    @BaseDb.reconnect_on_failure
     async def list_colaboradores_by_agencia_id(self, id: int) -> list:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:

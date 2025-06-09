@@ -22,11 +22,11 @@ class IaRepository:
 
         output_text = ""
 
-        # return {
-        #     "colaboradores": ["Colaborador 1", "Colaborador 2"],
-        #     "propor": ["organização", "arte"],
-        #     "evitar": ["compras sem planejamento"],
-        # }
+        return {
+            "colaboradores": ["Colaborador 1", "Colaborador 2"],
+            "propor": ["organização", "arte"],
+            "evitar": ["compras sem planejamento"],
+        }
         response = client.invoke_agent(
             agentId=self.agent_id,
             agentAliasId=self.agent_alias,

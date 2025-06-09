@@ -29,7 +29,7 @@ class MongoConnection:
             server_api=ServerApi("1"),
             serverSelectionTimeoutMS=10000,
             socketTimeoutMS=30000,
-            connectTimeoutMS=10000
+            connectTimeoutMS=10000,
         )
         return self
 

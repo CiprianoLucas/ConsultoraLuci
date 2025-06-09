@@ -135,7 +135,7 @@ class ConsultaService:
             limite = 500
 
         return limite
-    
+
     def meses_desde_cadastro(self, cadastro: datetime) -> int:
         hoje = datetime.today()
 

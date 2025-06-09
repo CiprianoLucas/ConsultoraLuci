@@ -11,7 +11,7 @@ from infra.nosql import MongoConnection
 from infra.nosql.consultas import ConsultaNoSql
 from infra.nosql.score import ScoreNoSql
 from infra.redis import CacheConnection
-from infra.sql import ConnectionPool
+from infra.sql import BaseDb
 from infra.sql.agencia import AgenciaDb
 from infra.sql.associado import AssociadoDb
 from infra.sql.colaborador import ColaboradorDb
@@ -75,10 +75,19 @@ class Container:
             self.aws_client, self.settings.ia_id, self.settings.ia_alias
         )
 
-        agencia_db = AgenciaDb(self.db_pool)
-        associado_db = AssociadoDb(self.db_pool)
-        colaborador_db = ColaboradorDb(self.db_pool)
-        consulta_db = ConsultasDb(self.db_pool)
+        db_parameters = {
+            "pool": self.db_pool,
+            "user": self.settings.db_user,
+            "password": self.settings.db_password,
+            "host": self.settings.db_host,
+            "port": self.settings.db_port,
+            "db_name": self.settings.db_name,
+        }
+
+        agencia_db = AgenciaDb(**db_parameters)
+        associado_db = AssociadoDb(**db_parameters)
+        colaborador_db = ColaboradorDb(**db_parameters)
+        consulta_db = ConsultasDb(**db_parameters)
 
         nosql_db = self.mongo_connection.get_db()
 
@@ -98,14 +107,15 @@ class Container:
         )
 
     async def connect_to_sql_database(self) -> AsyncConnectionPool:
-        pool = ConnectionPool(
+        base_db = BaseDb(
             self.settings.db_user,
             self.settings.db_password,
             self.settings.db_host,
             self.settings.db_port,
             self.settings.db_name,
         )
-        return await pool.create_pool()
+        await base_db.recreate_pool()
+        return base_db.pool
 
     async def connect_to_nosql_database(self) -> MongoConnection:
         pool = MongoConnection(

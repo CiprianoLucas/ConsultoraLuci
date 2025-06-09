@@ -1,17 +1,12 @@
-from psycopg_pool import AsyncConnectionPool
+from datetime import datetime
 
 from domain.exceptions import NotFoundException
 from domain.models.associado import Associado
+from infra.sql import BaseDb
 
-from datetime import datetime
 
-
-class AssociadoDb:
-    pool: AsyncConnectionPool
-
-    def __init__(self, pool: AsyncConnectionPool) -> None:
-        self.pool = pool
-
+class AssociadoDb(BaseDb):
+    @BaseDb.reconnect_on_failure
     async def get_associado_by_cpf(self, cpf: str) -> Associado:
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:

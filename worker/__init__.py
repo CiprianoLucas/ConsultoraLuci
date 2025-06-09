@@ -22,7 +22,7 @@ async def worker_loop():
                     await container.consulta_service.start_consulta(dados[0], dados[1])
             except Exception as e:
                 print(str(e))
-                
+
         except Exception as e:
             print("Erro ao processar item da fila:", e)
             await asyncio.sleep(2)
