@@ -1,7 +1,7 @@
 import json
 import re
 import uuid
-
+import time
 import boto3
 
 
@@ -33,10 +33,11 @@ class IaRepository:
             sessionId=str(uuid.uuid4()),
             inputText=dados_json,
         )
-
+        time.sleep(10)
         try:
             if "completion" in response:
                 for event in response["completion"]:
+                    time.sleep(10)
                     if "chunk" in event:
                         chunk = event["chunk"]
                         part = chunk.get("bytes", b"").decode("utf-8")
