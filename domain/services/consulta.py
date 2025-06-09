@@ -99,7 +99,10 @@ class ConsultaService:
     async def verificar_limite_credito(self, associado: Associado) -> float:
         scores = await self.score_nosql.consultar_score(associado.cpf)
 
-        fator = 0.4 if len(scores) > 0 else 0.1
+        fator = 0.4 if scores else 0.1
+
+        meses_cadastro = self.meses_desde_cadastro(associado.cadastro)
+        parcelas = min(meses_cadastro, 60)
 
         for score in scores:
             match score["company"]:
@@ -126,12 +129,24 @@ class ConsultaService:
                 case _:
                     pass
 
-        limite = fator * associado.renda
+        limite = fator * associado.renda * parcelas
 
         if limite < 500:
             limite = 500
 
         return limite
+    
+    def meses_desde_cadastro(self, cadastro: datetime) -> int:
+        hoje = datetime.today()
+
+        anos = hoje.year - cadastro.year
+        meses = hoje.month - cadastro.month
+        total_meses = anos * 12 + meses
+
+        if hoje.day < cadastro.day:
+            total_meses -= 1
+
+        return total_meses
 
     async def get_dados_colaborador(self, colaboradores: list):
 

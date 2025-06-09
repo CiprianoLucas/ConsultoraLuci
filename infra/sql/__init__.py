@@ -18,6 +18,7 @@ class ConnectionPool:
                 dbname=self.db_name,
                 host=self.host,
                 port=self.port,
+                connect_timeout=10
             ),
             open=False,
         )

@@ -78,9 +78,11 @@
               :key="registro.nome"
             >
               <div class="card-body">
-                <h5 class="card-title">{{ registro.nome }}</h5>
+                <div class="d-flex justify-content-center">
+                  <h4 class="card-title">{{ registro.nome }}</h4>
+                </div>
                 <div v-if="!registro.ia">
-                  <div class="mt-3">
+                  <div class="mt-3" v-if="registro.colaboradores">
                     <h6 class="fw-bold">🧑‍💼 Ordem dos Colaboradores:</h6>
                     <ol class="list-group list-group-numbered mb-3">
                       <li
@@ -92,8 +94,8 @@
                       </li>
                     </ol>
                   </div>
-                  <div class="mb-3">
-                    <h5 class="fw-bold text-success">🤑 Limite de crédito:</h5>
+                  <div class="mb-3" v-if="registro.limite_credito">
+                    <h5 class="fw-bold text-success">🤑 Crédito pré-aprovado:</h5>
                     <div class="d-flex justify-content-center">
                       <p class="h5 text-success">
                         {{
@@ -105,7 +107,7 @@
                       </p>
                     </div>
                   </div>
-                  <div class="mb-3">
+                  <div class="mb-3" v-if="registro.propor">
                     <h6 class="fw-bold text-success">🟢 Assuntos para Propor:</h6>
                     <div>
                       <span
@@ -118,7 +120,7 @@
                     </div>
                   </div>
 
-                  <div>
+                  <div v-if="registro.evitar">
                     <h6 class="fw-bold text-danger">🟠 Assuntos a Evitar:</h6>
                     <div>
                       <span
@@ -146,6 +148,9 @@
             </div>
           </div>
         </template>
+      </div>
+      <div class="footer">
+        <p>&copy;2025 - Lucas H. Cipriano</p>
       </div>
     </div>
   </div>
@@ -303,7 +308,7 @@ h1 {
   font-style: normal !important;
   font-weight: 400 !important;
   font-family: "Exo 2";
-  font-size: 40px !important;
+  font-size: 30px !important;
   color: #323c32 !important;
   line-height: 120% !important;
   letter-spacing: -0.4px !important;
@@ -337,5 +342,13 @@ p {
 span {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
+}
+
+.footer {
+  color: #00000062;
+  text-align: center;
+  justify-content: center;
+  margin: 10px 0px;
+  padding: 10px;
 }
 </style>

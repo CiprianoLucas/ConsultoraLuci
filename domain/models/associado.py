@@ -7,6 +7,7 @@ class Associado:
     cpf: str
     nascimento: datetime
     renda: float
+    cadastro: datetime
 
     def __init__(
         self,
@@ -15,6 +16,7 @@ class Associado:
         cpf: str | None = None,
         nascimento: datetime | None = None,
         renda: float | None = None,
+        cadastro: datetime | None = None,
     ) -> None:
         if id is not None:
             self.id = id
@@ -26,3 +28,5 @@ class Associado:
             self.nascimento = nascimento
         if renda is not None:
             self.renda = renda
+        if cadastro is not None:
+            self.cadastro = cadastro

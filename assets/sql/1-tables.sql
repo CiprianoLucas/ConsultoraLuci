@@ -17,6 +17,7 @@ CREATE TABLE public.associado (
 	cpf varchar NOT NULL,
 	nascimento date NOT NULL,
 	renda float NOT NULL,
+	cadastro date NOT NULL,
 	CONSTRAINT associado_pk PRIMARY KEY (id),
 	CONSTRAINT newtable_unique UNIQUE (cpf)
 );

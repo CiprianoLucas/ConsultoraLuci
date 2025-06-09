@@ -24,7 +24,13 @@ class MongoConnection:
             f"?retryWrites=true&w=majority&appName={self.app_name}&tls=true"
         )
 
-        self.client = AsyncIOMotorClient(uri, server_api=ServerApi("1"))
+        self.client = AsyncIOMotorClient(
+            uri,
+            server_api=ServerApi("1"),
+            serverSelectionTimeoutMS=10000,
+            socketTimeoutMS=30000,
+            connectTimeoutMS=10000
+        )
         return self
 
     def get_db(self):

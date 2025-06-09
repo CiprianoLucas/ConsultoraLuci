@@ -3,6 +3,8 @@ from psycopg_pool import AsyncConnectionPool
 from domain.exceptions import NotFoundException
 from domain.models.associado import Associado
 
+from datetime import datetime
+
 
 class AssociadoDb:
     pool: AsyncConnectionPool
@@ -15,7 +17,7 @@ class AssociadoDb:
             async with conn.cursor() as cur:
                 sql = """
                             SELECT
-                                id, nome, cpf, nascimento, renda
+                                id, nome, cpf, nascimento, renda, cadastro
                             FROM associado
                             WHERE cpf = %s
                             """
@@ -26,6 +28,14 @@ class AssociadoDb:
                 if associado is None:
                     raise NotFoundException("CPF do associado")
 
+                nascimento = datetime.combine(associado[3], datetime.min.time())
+                cadastro = datetime.combine(associado[5], datetime.min.time())
+
                 return Associado(
-                    associado[0], associado[1], associado[2], associado[3], associado[4]
+                    associado[0],
+                    associado[1],
+                    associado[2],
+                    nascimento,
+                    associado[4],
+                    cadastro,
                 )

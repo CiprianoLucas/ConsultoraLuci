@@ -31,7 +31,7 @@ class ConsultaNoSql:
         try:
             await self.collection.insert_one(doc)
         except Exception as e:
-            raise Exception(str(e))
+             print(f"Erro: {e}")
 
     async def delete(self, agencia: str, cpf: str):
         try:
