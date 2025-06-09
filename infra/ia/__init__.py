@@ -1,58 +1,47 @@
 import json
 import re
-import uuid
-import time
-import boto3
+
+from aiobotocore.session import get_session
+
+from infra.ia.model import claude3p7
 
 
 class IaRepository:
-    session: boto3.Session
-    agent_id: str
-    agent_alias: str
+    def __init__(self, iam_aws_key: str, iam_aws_pass: str):
+        self.iam_aws_key = iam_aws_key
+        self.iam_aws_pass = iam_aws_pass
 
-    def __init__(self, session: boto3.Session, agent_id: str, agent_alias: str):
-        self.session = session
-        self.agent_id = agent_id
-        self.agent_alias = agent_alias
+    async def enviar_pergunta(self, data: str) -> str:
+        session = get_session()
+        async with session.create_client(
+            "bedrock-runtime",
+            region_name="us-east-1",
+            aws_access_key_id=self.iam_aws_key,
+            aws_secret_access_key=self.iam_aws_pass,
+        ) as client:
 
-    def consultar_associado(self, dados: dict) -> str:
-        dados_json = json.dumps(dados, ensure_ascii=False)
+            payload = json.loads(json.dumps(claude3p7))
+            payload["messages"][1]["content"][0]["text"] = json.dumps(data)
 
-        client = self.session.client("bedrock-agent-runtime")
+            try:
+                response = await client.invoke_model(
+                    modelId=(
+                        "arn:aws:bedrock:us-east-1:381492098067:inference-profile"
+                        "/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+                    ),
+                    contentType="application/json",
+                    accept="application/json",
+                    body=json.dumps(payload),
+                )
 
-        output_text = ""
+                body_bytes = await response["body"].read()
+                body = json.loads(body_bytes)
+                resposta = body["content"][0]["text"]
 
-        # return {
-        #     "colaboradores": ["Colaborador 1", "Colaborador 2"],
-        #     "propor": ["organização", "arte"],
-        #     "evitar": ["compras sem planejamento"],
-        # }
-        response = client.invoke_agent(
-            agentId=self.agent_id,
-            agentAliasId=self.agent_alias,
-            sessionId=str(uuid.uuid4()),
-            inputText=dados_json,
-        )
-        time.sleep(10)
-        try:
-            if "completion" in response:
-                for event in response["completion"]:
-                    time.sleep(10)
-                    if "chunk" in event:
-                        chunk = event["chunk"]
-                        part = chunk.get("bytes", b"").decode("utf-8")
-                        output_text += part
-            else:
-                output_text = response.get("outputText", "")
+                matches = re.findall(r"\{.*?\}", resposta, re.DOTALL)
+                resultado_dict = json.loads(matches[0])
 
-            matches = re.findall(r"\{.*?\}", output_text, re.DOTALL)
-            resultado_dict = json.loads(matches[0])
-        except Exception:
-            resultado_dict = {
-                "colaboradores": [],
-                "propor": [],
-                "evitar": [],
-                "ia": output_text or "Me desculpe! Buguei ;(",
-            }
+            except Exception:
+                resultado_dict = {"colaboradores": [], "propor": [], "evitar": []}
 
-        return resultado_dict
+            return resultado_dict

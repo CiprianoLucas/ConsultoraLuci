@@ -1,4 +1,3 @@
-import boto3
 from httpx import AsyncClient
 from psycopg_pool import AsyncConnectionPool
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -53,7 +52,6 @@ class Container:
     settings: Settings = Settings()
     redis_connection: CacheConnection
     http_client: AsyncClient
-    aws_client: boto3.Session
 
     async def load_dependencies(self):
 
@@ -61,18 +59,13 @@ class Container:
         self.mongo_connection = await self.connect_to_nosql_database()
         self.redis_connection = self.connect_to_redis()
         self.http_client = AsyncClient()
-        self.aws_client = boto3.Session(
-            region_name="us-east-1",
-            aws_access_key_id=self.settings.iam_aws_key,
-            aws_secret_access_key=self.settings.iam_aws_pass,
-        )
 
         auth_repository = AuthRepository(
             self.settings.secret_key, self.settings.expiration
         )
 
         ia_repository = IaRepository(
-            self.aws_client, self.settings.ia_id, self.settings.ia_alias
+            self.settings.iam_aws_key, self.settings.iam_aws_pass
         )
 
         db_parameters = {

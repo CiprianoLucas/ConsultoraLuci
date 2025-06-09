@@ -59,7 +59,7 @@ class ConsultaService:
 
         await self.consulta_nosql.delete(agencia, associado_cpf)
 
-        if consulta_recente:
+        if consulta_recente and consulta_recente["result"].get("colaboradores"):
             data_consulta = consulta_recente["date_result"]
 
             if isinstance(data_consulta, str):
@@ -88,7 +88,7 @@ class ConsultaService:
 
         payload = {"associado": dados_associado, "colaboradores": dados_colaborador}
 
-        response = self.ia.consultar_associado(payload)
+        response = await self.ia.enviar_pergunta(payload)
 
         response["limite_credito"] = await self.verificar_limite_credito(associado)
 

@@ -7,7 +7,8 @@ from app.container import container
 from app.HTTP.handlers.auth import auth_router
 from app.HTTP.handlers.consulta import consulta_router
 from app.HTTP.middlewares.cors import add_cors_middleware
-from worker import start_worker_in_thread
+
+# from worker import start_worker_in_thread
 
 
 @asynccontextmanager
