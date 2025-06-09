@@ -1,6 +1,6 @@
-from infra.auth import AuthRepository
-from infra.database.agencia import AgenciaDb
 from domain.exceptions import InvalidTokenException, WrongPasswordException
+from infra.auth import AuthRepository
+from infra.sql.agencia import AgenciaDb
 
 
 class AuthService:

@@ -7,14 +7,28 @@ from redis.asyncio import Redis
 class CacheConnection:
     host: str
     port: int
+    password: str
+    username: str
+    decode_responses: bool
     client: Redis
 
-    def __init__(self, host: str, port: int):
+    def __init__(
+        self, host: str, port: int, password: str, username: str, decode: bool = True
+    ):
         self.host = host
         self.port = port
+        self.password = password
+        self.username = username
+        self.decode_responses = decode
 
     def create_connection(self) -> None:
-        self.client = Redis(host=self.host, port=self.port)
+        self.client = Redis(
+            host=self.host,
+            port=self.port,
+            decode_responses=self.decode_responses,
+            username=self.username,
+            password=self.password,
+        )
 
     async def push_para_fila(self, fila: str, valor: Any):
         try:

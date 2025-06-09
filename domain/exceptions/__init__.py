@@ -6,7 +6,7 @@ class InvalidTokenException(Exception):
 class WrongPasswordException(Exception):
     def __init__(self) -> None:
         super().__init__("Autenticação inválida")
-        
+
 
 class NotFoundException(Exception):
     def __init__(self, type_value: str):

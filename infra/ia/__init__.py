@@ -1,6 +1,6 @@
 import json
-import uuid
 import re
+import uuid
 
 import boto3
 
@@ -15,12 +15,18 @@ class IaRepository:
         self.agent_id = agent_id
         self.agent_alias = agent_alias
 
-    def consultar_cooperado(self, dados: dict) -> str:
+    def consultar_associado(self, dados: dict) -> str:
         dados_json = json.dumps(dados, ensure_ascii=False)
 
         client = self.session.client("bedrock-agent-runtime")
 
-        output_text = ''
+        output_text = ""
+
+        return {
+            "colaboradores": ["Colaborador 1", "Colaborador 2"],
+            "propor": ["organização", "arte"],
+            "evitar": ["compras sem planejamento"],
+        }
         response = client.invoke_agent(
             agentId=self.agent_id,
             agentAliasId=self.agent_alias,
@@ -38,9 +44,9 @@ class IaRepository:
             else:
                 output_text = response.get("outputText", "")
 
-            matches = re.findall(r'\{.*?\}', output_text, re.DOTALL)
+            matches = re.findall(r"\{.*?\}", output_text, re.DOTALL)
             resultado_dict = json.loads(matches[0])
-        except:
+        except Exception:
             resultado_dict = {
                 "colaboradores": [],
                 "propor": [],

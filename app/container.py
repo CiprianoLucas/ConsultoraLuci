@@ -6,13 +6,16 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from domain.services.auth import AuthService
 from domain.services.consulta import ConsultaService
 from infra.auth import AuthRepository
-from infra.database import ConnectionPool
-from infra.database.agencia import AgenciaDb
-from infra.database.colaborador import ColaboradorDb
-from infra.database.consultas import ConsultasDb
-from infra.database.cooperado import CooperadoDb
 from infra.ia import IaRepository
+from infra.nosql import MongoConnection
+from infra.nosql.consultas import ConsultaNoSql
+from infra.nosql.score import ScoreNoSql
 from infra.redis import CacheConnection
+from infra.sql import ConnectionPool
+from infra.sql.agencia import AgenciaDb
+from infra.sql.associado import AssociadoDb
+from infra.sql.colaborador import ColaboradorDb
+from infra.sql.consultas import ConsultasDb
 
 
 class Settings(BaseSettings):
@@ -23,6 +26,9 @@ class Settings(BaseSettings):
     db_password: str
     redis_host: str
     redis_port: str
+    redis_password: str = "default"
+    redis_username: str = "default"
+    redis_decode: bool = True
     redis_fila: str
     secret_key: str
     expiration: int
@@ -30,6 +36,11 @@ class Settings(BaseSettings):
     iam_aws_pass: str
     ia_id: str
     ia_alias: str
+    nosql_user: str
+    nosql_password: str
+    nosql_cluster: str
+    nosql_db_name: str
+    nosql_app_name: str = "default"
 
     model_config = SettingsConfigDict(env_file=".env")
 
@@ -38,6 +49,7 @@ class Container:
     auth_service: AuthService
     consulta_service: ConsultaService
     db_pool: AsyncConnectionPool
+    mongo_connection: MongoConnection
     settings: Settings = Settings()
     redis_connection: CacheConnection
     http_client: AsyncClient
@@ -45,7 +57,8 @@ class Container:
 
     async def load_dependencies(self):
 
-        self.db_pool = await self.connect_to_database()
+        self.db_pool = await self.connect_to_sql_database()
+        self.mongo_connection = await self.connect_to_nosql_database()
         self.redis_connection = self.connect_to_redis()
         self.http_client = AsyncClient()
         self.aws_client = boto3.Session(
@@ -63,21 +76,28 @@ class Container:
         )
 
         agencia_db = AgenciaDb(self.db_pool)
-        cooperado_db = CooperadoDb(self.db_pool)
+        associado_db = AssociadoDb(self.db_pool)
         colaborador_db = ColaboradorDb(self.db_pool)
         consulta_db = ConsultasDb(self.db_pool)
 
+        nosql_db = self.mongo_connection.get_db()
+
+        consulta_nosql = ConsultaNoSql(nosql_db)
+        score_nosql = ScoreNoSql(nosql_db)
+
         self.auth_service = AuthService(agencia_db, auth_repository)
         self.consulta_service = ConsultaService(
-            cooperado_db,
+            associado_db,
             colaborador_db,
             consulta_db,
+            consulta_nosql,
+            score_nosql,
             self.redis_connection,
             self.settings.redis_fila,
             ia_repository,
         )
 
-    async def connect_to_database(self) -> AsyncConnectionPool:
+    async def connect_to_sql_database(self) -> AsyncConnectionPool:
         pool = ConnectionPool(
             self.settings.db_user,
             self.settings.db_password,
@@ -87,13 +107,30 @@ class Container:
         )
         return await pool.create_pool()
 
+    async def connect_to_nosql_database(self) -> MongoConnection:
+        pool = MongoConnection(
+            self.settings.nosql_user,
+            self.settings.nosql_password,
+            self.settings.nosql_cluster,
+            self.settings.nosql_db_name,
+            self.settings.nosql_app_name,
+        )
+        return await pool.create_client()
+
     def connect_to_redis(self) -> CacheConnection:
-        connection = CacheConnection(self.settings.redis_host, self.settings.redis_port)
+        connection = CacheConnection(
+            self.settings.redis_host,
+            self.settings.redis_port,
+            self.settings.redis_password,
+            self.settings.redis_username,
+            self.settings.redis_decode,
+        )
         connection.create_connection()
         return connection
 
     async def close_container(self) -> None:
         await self.db_pool.close()
+        await self.mongo_connection.close_client()
         await self.redis_connection.close()
         await self.http_client.aclose()
 

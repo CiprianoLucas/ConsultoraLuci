@@ -1,9 +1,8 @@
-from fastapi.routing import APIRouter
 from fastapi import HTTPException
+from fastapi.routing import APIRouter
 
 from app.container import container
 from app.DTOs.token import TokenDTO, TokenResponseDTO
-
 from domain.exceptions import NotFoundException, WrongPasswordException
 
 auth_router = APIRouter()
@@ -18,7 +17,7 @@ async def get_token(request: TokenDTO):
         return TokenResponseDTO(token=token)
     except (NotFoundException, WrongPasswordException) as e:
         raise HTTPException(401, str(e))
-    except Exception as e:
+    except Exception:
         raise HTTPException(
             500, "Erro interno, se persistir entre em contato com nosso suporte"
         )

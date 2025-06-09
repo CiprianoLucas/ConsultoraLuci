@@ -1,64 +1,136 @@
+from datetime import datetime, timedelta, timezone
+
 import pandas as pd
 
-from infra.database.colaborador import ColaboradorDb
-from infra.database.consultas import ConsultasDb
-from infra.database.cooperado import CooperadoDb
+from domain.models.associado import Associado
 from infra.ia import IaRepository
+from infra.nosql.consultas import ConsultaNoSql
+from infra.nosql.score import ScoreNoSql
 from infra.redis import CacheConnection
+from infra.sql.associado import AssociadoDb
+from infra.sql.colaborador import ColaboradorDb
+from infra.sql.consultas import ConsultasDb
 
 
 class ConsultaService:
-    cooperado_db: CooperadoDb
+    associado_db: AssociadoDb
     colaborador_db: ColaboradorDb
     consulta_db: ConsultasDb
+    consulta_nosql: ConsultaNoSql
+    score_nosql: ScoreNoSql
     fila: CacheConnection
     rota: str
     ia: IaRepository
 
     def __init__(
         self,
-        cooperado_db: CooperadoDb,
+        associado_db: AssociadoDb,
         colaborador_db: ColaboradorDb,
         consulta_db: ConsultasDb,
+        consulta_nosql: ConsultaNoSql,
+        score_nosql: ScoreNoSql,
         fila: CacheConnection,
         rota: str,
         ia: IaRepository,
     ):
-        self.cooperado_db = cooperado_db
+        self.associado_db = associado_db
         self.colaborador_db = colaborador_db
         self.consulta_db = consulta_db
+        self.consulta_nosql = consulta_nosql
+        self.score_nosql = score_nosql
         self.fila = fila
         self.rota = rota
         self.ia = ia
 
     async def list_consultas_agencia(self, agencia: int):
-        result = await self.consulta_db.list_consultas_agencia(agencia)
+        result = await self.consulta_nosql.list_consultas_agencia(agencia)
         return result
 
-    async def push_in_line(self, cooperado: str, agencia: int):
-        await self.cooperado_db.get_cooperado_by_cpf(cooperado)
-        await self.fila.push_para_fila(self.rota, f"{cooperado}_{agencia}")
+    async def push_in_line(self, associado: str, agencia: int):
+        await self.associado_db.get_associado_by_cpf(associado)
+        await self.fila.push_para_fila(self.rota, f"{associado}_{agencia}")
 
-    async def start_consulta(self, cooperado: str, agencia: int):
-        cooperado = await self.cooperado_db.get_cooperado_by_cpf(cooperado)
+    async def start_consulta(self, associado_cpf: str, agencia: int):
+        hoje = datetime.now(timezone.utc)
+        consulta_recente = await self.consulta_nosql.ultima_consulta(
+            associado_cpf, agencia
+        )
+
+        await self.consulta_nosql.delete(agencia, associado_cpf)
+
+        if consulta_recente:
+            data_consulta = consulta_recente["date_result"]
+
+            if isinstance(data_consulta, str):
+                data_consulta = datetime.fromisoformat(data_consulta)
+
+            if data_consulta.tzinfo is None:
+                data_consulta = data_consulta.replace(tzinfo=timezone.utc)
+
+            hoje = datetime.now(timezone.utc)
+
+            if hoje - data_consulta < timedelta(days=30):
+                await self.consulta_nosql.insert(
+                    agencia, associado_cpf, consulta_recente["result"], data_consulta
+                )
+                return
+
+        associado = await self.associado_db.get_associado_by_cpf(associado_cpf)
         colaboradores = await self.colaborador_db.list_colaboradores_by_agencia_id(
             agencia
         )
 
-        dados_cooperado = await self.get_dados_cooperado(cooperado[0])
+        dados_associado = await self.get_dados_associado(associado.id)
         dados_colaborador = await self.get_dados_colaborador(colaboradores)
 
-        dados_cooperado["nascimento"] = str(cooperado[2])
+        dados_associado["nascimento"] = str(associado.nascimento)
 
-        payload = {"cooperado": dados_cooperado, "colaboradores": dados_colaborador}
+        payload = {"associado": dados_associado, "colaboradores": dados_colaborador}
 
-        response = self.ia.consultar_cooperado(payload)
+        response = self.ia.consultar_associado(payload)
 
-        response["nome"] = cooperado[1]
+        response["limite_credito"] = await self.verificar_limite_credito(associado)
 
-        await self.consulta_db.insert(agencia, response)
+        response["nome"] = associado.nome
 
-        return
+        await self.consulta_nosql.insert(agencia, associado_cpf, response)
+
+    async def verificar_limite_credito(self, associado: Associado) -> float:
+        scores = await self.score_nosql.consultar_score(associado.cpf)
+
+        fator = 0.4 if len(scores) > 0 else 0.1
+
+        for score in scores:
+            match score["company"]:
+                case "SERASA":
+                    score_val = score["result"].get("score")
+                    if isinstance(score_val, (int, float)) or (
+                        isinstance(score_val, str)
+                        and score_val.replace(".", "", 1).isdigit()
+                    ):
+                        fator = fator * (1000 / float(score_val))
+                    else:
+                        fator = fator * 0.5
+                case "SPC":
+                    nivel = score["result"].get("nivel")
+                    if nivel == "alto":
+                        fator = fator * 1
+                    elif nivel == "medio":
+                        fator = fator * 0.5
+                    elif nivel == "baixo":
+                        fator = fator * 0.3
+                    else:
+                        fator = fator * 0.5
+
+                case _:
+                    pass
+
+        limite = fator * associado.renda
+
+        if limite < 500:
+            limite = 500
+
+        return limite
 
     async def get_dados_colaborador(self, colaboradores: list):
 
@@ -69,7 +141,7 @@ class ConsultaService:
             )
             creditos = pd.DataFrame(
                 await self.consulta_db.list_creditos_by_colaborador(colaborador[0]),
-                columns=["cooperado", "valor", "motivo", "personalide cooperado"],
+                columns=["associado", "valor", "motivo", "personalide associado"],
             )
             result.append(
                 {
@@ -81,19 +153,21 @@ class ConsultaService:
 
         return result
 
-    async def get_dados_cooperado(self, cooperado):
+    async def get_dados_associado(self, associado_id):
         personalidade = list(
-            await self.consulta_db.list_personalidade_by_cooperado(cooperado)
+            await self.consulta_db.list_personalidade_by_associado(associado_id)
         )
         creditos = pd.DataFrame(
-            await self.consulta_db.list_creditos_by_cooperado(cooperado),
+            await self.consulta_db.list_creditos_by_associado(associado_id),
             columns=["motivo", "valor"],
         )
         compras = pd.DataFrame(
-            await self.consulta_db.list_compras_by_cooperado(cooperado),
+            await self.consulta_db.list_compras_by_associado(associado_id),
             columns=["segmento", "valor"],
         )
-        feedbacks = list(await self.consulta_db.list_feedback_by_cooperado(cooperado))
+        feedbacks = list(
+            await self.consulta_db.list_feedback_by_associado(associado_id)
+        )
 
         result = {
             "personalidade": personalidade,

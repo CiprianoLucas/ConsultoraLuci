@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 
 
 class ConsultarDTO(BaseModel):
-    cooperado: str = Field()
+    associado: str = Field()
 
 
 class ConsultarResponseDTO(BaseModel):

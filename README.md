@@ -2,7 +2,7 @@
 Agente facilitador para fechamento de negócios, utilizando de diversas tecnologias para as mais diversas personalidades dos clientes.
 
 ## Propósito
-O objetivo deste projeto é facilitar a intereção entre colaboradores de agências de crédito cooperativitas com seus cooperados, Verificando as personalidades de cada colaborados, cooperado juntamente com seus históricos (créditos aprovados, feedbacks anteriores, compras). Foi utilizado um agente de IA para fazer a análise em Json de todos os dados, e dessa maneira ele retorna uma lista de colaboradores em ordem do mais indicado para o menos indicado. Também retorna assuntos que podem ser puxados e quais evitar para garantir melhor conexão entre colaborador e cooperado.
+O objetivo deste projeto é facilitar a intereção entre colaboradores de agências de crédito cooperativitas com seus associados, Verificando as personalidades de cada colaborados, associado juntamente com seus históricos (créditos aprovados, feedbacks anteriores, compras). Foi utilizado um agente de IA para fazer a análise em Json de todos os dados, e dessa maneira ele retorna uma lista de colaboradores em ordem do mais indicado para o menos indicado. Também retorna assuntos que podem ser puxados e quais evitar para garantir melhor conexão entre colaborador e associado.
 
 ## Funcionalidades aplicadas
 - Integração com IA para análise de personalidade
@@ -49,8 +49,8 @@ O objetivo deste projeto é facilitar a intereção entre colaboradores de agên
 ### Clonando o Repositório
 
 ```bash
-git clone https://github.com/CiprianoLucas/ConsultoraAila.git
-cd ConsultoraAila
+git clone https://github.com/CiprianoLucas/ConsultoraLuci.git
+cd ConsultoraLuci
 ```
 
 ## Configuração obrigatória
@@ -58,7 +58,7 @@ cd ConsultoraAila
 
 Configure as variáveis de ambiente necessárias, como credenciais do banco de dados e chaves secretas, utilize os arquivos example.env para criar um .env
 
-Crie um arquivo .env em /front/aila com:
+Crie um arquivo .env em /front/luci com:
 
 VITE_API=http://localhost:8000
 
@@ -83,7 +83,7 @@ uvicorn main:app --reload
 
 #### Para subir o front-end localmente faremos os seguintes comandos em outro terminal:
 ```bash
-cd frons/aila
+cd frons/luci
 npm i
 npm run dev
 ```
